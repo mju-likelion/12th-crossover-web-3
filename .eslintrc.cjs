@@ -22,5 +22,9 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'off',
     'react/jsx-no-useless-fragment': 'off',
     'react/react-in-jsx-scope': 'off',
+    'import/prefer-default-export': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    'react/function-component-definition': 'off',
+    'import/extensions': 'off',
   },
 }
