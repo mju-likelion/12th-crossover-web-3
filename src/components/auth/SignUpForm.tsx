@@ -10,12 +10,13 @@ const SignUpForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignUpFormValues>({
     resolver: yupResolver(signupSchema),
     mode: 'onChange',
   })
-
+  const value = watch()
   const onSubmit: SubmitHandler<SignUpFormValues> = data => {
     console.log(data)
   }
@@ -25,18 +26,21 @@ const SignUpForm = () => {
       <AuthInput
         name="nickname"
         placeholder="닉네임"
+        value={value}
         register={register}
         errorMsg={errors?.nickname?.message ?? ''}
       />
       <AuthInput
         name="email"
         placeholder="이메일"
+        value={value}
         register={register}
         errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
         name="password"
         placeholder="비밀번호"
+        value={value}
         register={register}
         errorMsg={errors?.password?.message ?? ''}
       />

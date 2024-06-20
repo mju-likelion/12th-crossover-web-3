@@ -13,12 +13,13 @@ const LogInForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<AuthFormValues>({
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
   })
-
+  const value = watch()
   const onSubmit: SubmitHandler<AuthFormValues> = data => {
     console.log(data)
   }
@@ -28,12 +29,14 @@ const LogInForm = () => {
       <AuthInput
         name="email"
         placeholder="이메일"
+        value={value}
         register={register}
         errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
         name="password"
         placeholder="비밀번호"
+        value={value}
         register={register}
         errorMsg={errors.password?.message ?? ''}
       />
