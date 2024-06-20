@@ -27,5 +27,6 @@ module.exports = {
     'react/function-component-definition': 'off',
     'import/extensions': 'off',
     'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 0,
   },
 }

@@ -1,19 +1,32 @@
 import styled from 'styled-components'
+import { FieldPath, FieldValues, UseFormRegister } from 'react-hook-form'
 
-interface AuthInputProps {
+interface AuthFieldValues<TFieldValues extends FieldValues> {
+  name: keyof TFieldValues
   placeholder: string
   helperText: string
+  register: UseFormRegister<TFieldValues>
 }
-const AuthInput: React.FC<AuthInputProps> = ({ placeholder, helperText }) => {
+
+function AuthInput<TFieldValues extends FieldValues>({
+  name,
+  placeholder,
+  helperText,
+  register,
+}: AuthFieldValues<TFieldValues>) {
   return (
     <InputContainer>
       <InputBox>
-        <Input placeholder={placeholder} />
+        <Input
+          placeholder={placeholder}
+          {...register(name as FieldPath<TFieldValues>)}
+        />
       </InputBox>
       <HelperText>{helperText}</HelperText>
     </InputContainer>
   )
 }
+
 const InputContainer = styled.div``
 const InputBox = styled.div`
   padding: 30px 28px;
