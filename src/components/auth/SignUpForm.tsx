@@ -1,11 +1,20 @@
 import styled from 'styled-components'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import AuthInput from './AuthInput.tsx'
 import AuthButton from './AuthButton.tsx'
 import { SignUpFormValues } from '../../types'
+import { signupSchema } from '../../validation.ts'
 
 const SignUpForm = () => {
-  const { register, handleSubmit } = useForm<SignUpFormValues>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormValues>({
+    resolver: yupResolver(signupSchema),
+    mode: 'onChange',
+  })
 
   const onSubmit: SubmitHandler<SignUpFormValues> = data => {
     console.log(data)
@@ -16,20 +25,20 @@ const SignUpForm = () => {
       <AuthInput
         name="nickname"
         placeholder="닉네임"
-        helperText="텍스트"
         register={register}
+        errorMsg={errors?.nickname?.message ?? ''}
       />
       <AuthInput
         name="email"
         placeholder="이메일"
-        helperText="이메일"
         register={register}
+        errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
         name="password"
         placeholder="비밀번호"
-        helperText="영문 숫자 특수기호"
         register={register}
+        errorMsg={errors?.password?.message ?? ''}
       />
       <AuthButton text="완료하기" />
     </FormContainer>

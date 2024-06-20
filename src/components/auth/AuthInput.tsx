@@ -4,15 +4,15 @@ import { FieldPath, FieldValues, UseFormRegister } from 'react-hook-form'
 interface AuthFieldValues<TFieldValues extends FieldValues> {
   name: keyof TFieldValues
   placeholder: string
-  helperText: string
   register: UseFormRegister<TFieldValues>
+  errorMsg: string
 }
 
 function AuthInput<TFieldValues extends FieldValues>({
   name,
   placeholder,
-  helperText,
   register,
+  errorMsg,
 }: AuthFieldValues<TFieldValues>) {
   return (
     <InputContainer>
@@ -22,12 +22,14 @@ function AuthInput<TFieldValues extends FieldValues>({
           {...register(name as FieldPath<TFieldValues>)}
         />
       </InputBox>
-      <HelperText>{helperText}</HelperText>
+      {errorMsg && <HelperText>{errorMsg}</HelperText>}
     </InputContainer>
   )
 }
 
-const InputContainer = styled.div``
+const InputContainer = styled.div`
+  margin-bottom: 16px;
+`
 const InputBox = styled.div`
   padding: 30px 28px;
   border: 2px solid ${({ theme }) => theme.colors.GRAY};
@@ -37,7 +39,7 @@ const Input = styled.input`
   ${({ theme }) => theme.typographies.SUB_TEXT};
 `
 const HelperText = styled.p`
-  margin: 0 0 10px 22px;
+  margin-left: 22px;
   padding: 10px;
   ${({ theme }) => theme.typographies.HELPER_TEXT};
   color: ${({ theme }) => theme.colors.GRAY};

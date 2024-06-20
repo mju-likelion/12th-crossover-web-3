@@ -1,14 +1,23 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import AuthInput from './AuthInput.tsx'
 import AuthButton from './AuthButton.tsx'
 import { AuthFormValues } from '../../types'
+import { loginSchema } from '../../validation.ts'
 
 const LogInForm = () => {
   const navigate = useNavigate()
 
-  const { register, handleSubmit } = useForm<AuthFormValues>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthFormValues>({
+    resolver: yupResolver(loginSchema),
+    mode: 'onChange',
+  })
 
   const onSubmit: SubmitHandler<AuthFormValues> = data => {
     console.log(data)
@@ -19,14 +28,14 @@ const LogInForm = () => {
       <AuthInput
         name="email"
         placeholder="이메일"
-        helperText="이메일"
         register={register}
+        errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
         name="password"
         placeholder="비밀번호"
-        helperText="영문 특수문자"
         register={register}
+        errorMsg={errors.password?.message ?? ''}
       />
       <AuthButton text="로그인" />
       <SignUpButton onClick={() => navigate('/signUp')}>회원가입</SignUpButton>
