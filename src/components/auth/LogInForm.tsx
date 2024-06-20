@@ -12,6 +12,7 @@ const LogInForm = () => {
 
   const {
     register,
+    setValue,
     handleSubmit,
     watch,
     formState: { errors },
@@ -31,6 +32,7 @@ const LogInForm = () => {
         placeholder="이메일"
         value={value}
         register={register}
+        setValue={setValue}
         errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
@@ -38,6 +40,7 @@ const LogInForm = () => {
         placeholder="비밀번호"
         value={value}
         register={register}
+        setValue={setValue}
         errorMsg={errors.password?.message ?? ''}
       />
       <AuthButton text="로그인" />

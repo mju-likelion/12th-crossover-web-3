@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import { FieldPath, FieldValues, UseFormRegister } from 'react-hook-form'
+import {
+  FieldPath,
+  FieldValues,
+  PathValue,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form'
 import successIcon from '../../assets/success.svg'
 import errorIcon from '../../assets/error.svg'
 import cancelIcon from '../../assets/cancel.svg'
@@ -9,6 +15,7 @@ interface AuthFieldValues<TFieldValues extends FieldValues> {
   placeholder: string
   value: TFieldValues
   register: UseFormRegister<TFieldValues>
+  setValue: UseFormSetValue<TFieldValues>
   errorMsg: string
 }
 interface InputBoxStyle {
@@ -21,8 +28,13 @@ function AuthInput<TFieldValues extends FieldValues>({
   placeholder,
   value,
   register,
+  setValue,
   errorMsg,
 }: AuthFieldValues<TFieldValues>) {
+  const handleValueCancel = (name: FieldPath<TFieldValues>) => {
+    setValue(name, '' as PathValue<TFieldValues, typeof name>)
+  }
+
   return (
     <InputContainer>
       <InputBox $isFilled={value[name]} $isError={errorMsg !== ''}>
@@ -37,7 +49,9 @@ function AuthInput<TFieldValues extends FieldValues>({
           {value[name] && (
             <StatusButton src={errorMsg ? errorIcon : successIcon} />
           )}
-          <CancelButton>
+          <CancelButton
+            onClick={() => handleValueCancel(name as FieldPath<TFieldValues>)}
+          >
             <img src={cancelIcon} alt="입력 취소 버튼" />
           </CancelButton>
         </Icons>

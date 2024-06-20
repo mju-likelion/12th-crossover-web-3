@@ -9,6 +9,7 @@ import { signupSchema } from '../../validation.ts'
 const SignUpForm = () => {
   const {
     register,
+    setValue,
     handleSubmit,
     watch,
     formState: { errors },
@@ -28,6 +29,7 @@ const SignUpForm = () => {
         placeholder="닉네임"
         value={value}
         register={register}
+        setValue={setValue}
         errorMsg={errors?.nickname?.message ?? ''}
       />
       <AuthInput
@@ -35,6 +37,7 @@ const SignUpForm = () => {
         placeholder="이메일"
         value={value}
         register={register}
+        setValue={setValue}
         errorMsg={errors?.email?.message ?? ''}
       />
       <AuthInput
@@ -42,6 +45,7 @@ const SignUpForm = () => {
         placeholder="비밀번호"
         value={value}
         register={register}
+        setValue={setValue}
         errorMsg={errors?.password?.message ?? ''}
       />
       <AuthButton text="완료하기" />
