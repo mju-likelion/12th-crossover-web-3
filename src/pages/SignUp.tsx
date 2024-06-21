@@ -11,7 +11,7 @@ const SignUp = () => {
 }
 
 const PageWrapper = styled.div`
-  margin-top: 230px;
+  margin: 200px 0 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
