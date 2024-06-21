@@ -6,8 +6,12 @@ interface ButtonProps {
   color: keyof Colors
 }
 
-const Button: React.FC<ButtonProps> = ({ children, color }) => {
-  return <ButtonBox $color={color}>{children}</ButtonBox>
+const Button: React.FC<ButtonProps> = ({ children, color, ...attrProps }) => {
+  return (
+    <ButtonBox $color={color} {...attrProps}>
+      {children}
+    </ButtonBox>
+  )
 }
 
 const ButtonBox = styled.button<{ $color: keyof Colors }>`
