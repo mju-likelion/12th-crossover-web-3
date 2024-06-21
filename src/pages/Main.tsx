@@ -1,12 +1,19 @@
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import Button from '../components/post/Button.tsx'
 import PostListItem from '../components/post/PostListItem.tsx'
 import { postList } from '../assets/data/postList.ts'
 
 const Main = () => {
+  const navigate = useNavigate()
+  const onClick = () => {
+    navigate('/write')
+  }
   return (
     <PageContainer>
-      <WriteButton color="BLUE_1">작성하기</WriteButton>
+      <WriteButton onClick={onClick} color="BLUE_1">
+        작성하기
+      </WriteButton>
       <PostListContainer>
         {postList.content?.map(item => (
           <PostListItem key={item.postId} itemData={item} />

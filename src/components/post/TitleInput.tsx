@@ -1,23 +1,17 @@
-import React from 'react'
 import styled from 'styled-components'
 
-interface InputBoxProps {
-  tag: 'input' | 'div'
-  // eslint-disable-next-line react/require-default-props
-  title?: string
+export interface SetValueType {
+  value: string
+  setValue: (value: string) => void
 }
-const TitleInput: React.FC<InputBoxProps> = ({ tag, title }) => {
+const TitleInput: React.FC<SetValueType> = ({ value, setValue }) => {
   const MAX_LENGTH = 20
   return (
     <Box>
-      {tag === 'div' && title ? <Title>{title}</Title> : <input />}
-      {tag === 'div' && title ? (
-        <Length>
-          ( {title.length} / {MAX_LENGTH} )
-        </Length>
-      ) : (
-        <Length>( 3 / {MAX_LENGTH} )</Length>
-      )}
+      <Input maxLength={MAX_LENGTH} onChange={e => setValue(e.target.value)} />
+      <Length>
+        ( {value.length} / {MAX_LENGTH} )
+      </Length>
     </Box>
   )
 }
@@ -32,11 +26,12 @@ const Box = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.GRAY};
   border-radius: 25px;
 `
-const Title = styled.p`
+const Input = styled.input`
   ${({ theme }) => theme.typographies.SUB_TITLE};
 `
 const Length = styled.p`
   ${({ theme }) => theme.typographies.DEFAULT};
   color: ${({ theme }) => theme.colors.GRAY};
+  white-space: nowrap;
 `
 export default TitleInput
