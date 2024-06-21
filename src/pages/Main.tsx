@@ -18,7 +18,7 @@ const Main = () => {
 
 const PageContainer = styled.div`
   width: 784px;
-  margin: 0 auto;
+  margin: 140px auto 0;
   padding: 20px 0;
 `
 const WriteButton = styled(Button)`

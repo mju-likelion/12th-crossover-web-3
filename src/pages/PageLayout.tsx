@@ -13,7 +13,5 @@ const PageLayout = () => {
   )
 }
 
-const PageContainer = styled.div`
-  margin-top: 119px;
-`
+const PageContainer = styled.div``
 export default PageLayout
