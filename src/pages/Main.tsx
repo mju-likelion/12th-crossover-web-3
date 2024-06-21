@@ -1,17 +1,16 @@
 import styled from 'styled-components'
 import Button from '../components/post/Button.tsx'
 import PostListItem from '../components/post/PostListItem.tsx'
+import { postList } from '../assets/data/postList.ts'
 
 const Main = () => {
   return (
     <PageContainer>
       <WriteButton color="BLUE_1">작성하기</WriteButton>
       <PostListContainer>
-        <PostListItem isMine={false} />
-        <PostListItem isMine />
-        <PostListItem isMine />
-        <PostListItem isMine />
-        <PostListItem isMine={false} />
+        {postList.content?.map(item => (
+          <PostListItem key={item.postId} itemData={item} />
+        ))}
       </PostListContainer>
     </PageContainer>
   )
