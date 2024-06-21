@@ -66,6 +66,7 @@ function AuthInput<TFieldValues extends FieldValues>({
 }
 
 const InputContainer = styled.div`
+  width: 100%;
   margin-bottom: 16px;
 `
 const InputBox = styled.div<InputBoxStyle>`

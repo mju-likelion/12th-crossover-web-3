@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import AuthInput from './AuthInput.tsx'
 import AuthButton from './AuthButton.tsx'
+import Agree from './Agree.tsx'
 import { SignUpFormValues } from '../../types'
 import { signupSchema } from '../../validation.ts'
 
@@ -48,6 +49,7 @@ const SignUpForm = () => {
         setValue={setValue}
         errorMsg={errors?.password?.message ?? ''}
       />
+      <Agree />
       <AuthButton text="완료하기" />
     </FormContainer>
   )
@@ -55,6 +57,9 @@ const SignUpForm = () => {
 
 const FormContainer = styled.form`
   width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export default SignUpForm
