@@ -5,4 +5,5 @@ export interface AuthFormValues {
 
 export interface SignUpFormValues extends AuthFormValues {
   nickname: string
+  checkbox: boolean
 }

@@ -49,7 +49,15 @@ const SignUpForm = () => {
         setValue={setValue}
         errorMsg={errors?.password?.message ?? ''}
       />
-      <Agree />
+      <Agree
+        name="checkbox"
+        value={value}
+        register={register}
+        setValue={setValue}
+      />
+      {errors?.checkbox?.message && (
+        <HelperText>{errors?.checkbox?.message}</HelperText>
+      )}
       <AuthButton text="완료하기" />
     </FormContainer>
   )
@@ -60,6 +68,10 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+const HelperText = styled.p`
+  ${({ theme }) => theme.typographies.HELPER_TEXT};
+  color: ${({ theme }) => theme.colors.RED};
 `
 
 export default SignUpForm

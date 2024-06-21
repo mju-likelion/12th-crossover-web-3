@@ -11,6 +11,7 @@ const Messages = {
   PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',
   PASSWORD:
     '영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여 주세요.',
+  CHECKBOX: '개인정보에 동의해주세요.',
 }
 
 export const loginSchema = yup.object().shape({
@@ -41,4 +42,8 @@ export const signupSchema = yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,13}$/,
       Messages.PASSWORD
     ),
+  checkbox: yup
+    .boolean()
+    .oneOf([true], Messages.CHECKBOX)
+    .required(Messages.CHECKBOX),
 })
