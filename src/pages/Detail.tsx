@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import TitleInput from '../components/post/TitleInput.tsx'
-import ContentTextArea from '../components/post/ContentTextArea.tsx'
 import Button from '../components/post/Button.tsx'
+import ContentBox from '../components/post/ContentBox.tsx'
 import { postDetail } from '../assets/data/postDetail.ts'
 
 const Detail = () => {
@@ -9,8 +8,8 @@ const Detail = () => {
   return (
     <PageContainer>
       <Nickname>{nickname}</Nickname>
-      <TitleInput tag="div" title={title} />
-      <ContentTextArea tag="div" content={content} />
+      <ContentBox height="134" content={title} maxLength={20} />
+      <ContentBox height="750" content={content} maxLength={140} />
       {isMyPost && (
         <DeleteBox>
           <Message>※ 작성된 게시글은 수정이 불가합니다.</Message>

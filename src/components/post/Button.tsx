@@ -2,13 +2,19 @@ import styled from 'styled-components'
 import { Colors } from '../../styles/theme.ts'
 
 interface ButtonProps {
+  onClick?: () => void
   children: React.ReactNode
   color: keyof Colors
 }
 
-const Button: React.FC<ButtonProps> = ({ children, color, ...attrProps }) => {
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  children,
+  color,
+  ...attrProps
+}) => {
   return (
-    <ButtonBox $color={color} {...attrProps}>
+    <ButtonBox onClick={onClick} $color={color} {...attrProps}>
       {children}
     </ButtonBox>
   )
