@@ -16,6 +16,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
   },
   plugins: ['react', '@typescript-eslint', 'import', 'prettier'],
   rules: {
@@ -29,5 +30,6 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 0,
     'no-nested-ternary': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 }
