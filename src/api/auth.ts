@@ -1,5 +1,5 @@
 import { Axios } from './Axios.ts'
-import { SubmitSignUpFormValues, Term } from '../types'
+import { AuthFormValues, SubmitSignUpFormValues, Term } from '../types'
 
 interface TermsResponse {
   data: {
@@ -18,11 +18,18 @@ export const getTerms = async () => {
 }
 
 export const postSignup = async (data: SubmitSignUpFormValues) => {
-  console.log(data)
   try {
-    const response = await Axios.post('/auth/signIn', {
-      data,
-    })
+    const response = await Axios.post('/auth/signIn', data)
+    return response.data
+  } catch (e) {
+    console.log(e)
+    return []
+  }
+}
+
+export const postLogin = async (data: AuthFormValues) => {
+  try {
+    const response = await Axios.post('/auth/login', data)
     return response.data
   } catch (e) {
     console.log(e)

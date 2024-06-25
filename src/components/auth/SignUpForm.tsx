@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { getTerms, postSignup } from '../../api/auth.ts'
@@ -21,18 +22,15 @@ const SignUpForm = () => {
     mode: 'onChange',
   })
   const value = watch()
-
+  const navigate = useNavigate()
   const [terms, setTerms] = useState<Term[]>([
     {
-      termId: 'b39a908b-26c1-4562-9df3-0a89463c81fa',
-      content: '내용',
+      termId: '',
+      content: '',
     },
   ])
 
   const onSubmit: SubmitHandler<SignUpFormValues> = async data => {
-    console.log(data)
-    console.log(terms)
-
     if (terms.length > 0) {
       const agreements: Agreement[] = terms.map(term => ({
         termId: term.termId,
@@ -44,7 +42,8 @@ const SignUpForm = () => {
 
       try {
         const response = await postSignup(dataWithTermId)
-        console.log(response)
+        if (response.statusCode === '200') alert('회원가입 되었습니다!')
+        navigate('/login')
       } catch (e) {
         console.log(e)
       }
