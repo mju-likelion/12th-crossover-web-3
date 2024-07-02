@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useState } from 'react'
+import { postPost } from '../api/post.ts'
 import TitleInput from '../components/post/TitleInput.tsx'
 import ContentTextArea from '../components/post/ContentTextArea.tsx'
 import Button from '../components/post/Button.tsx'
@@ -13,7 +14,12 @@ const Write = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     if (formValues.title && formValues.content) {
-      console.log(formValues)
+      try {
+        const response = postPost(formValues)
+        console.log(response)
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 

@@ -6,6 +6,7 @@ import AuthInput from './AuthInput.tsx'
 import AuthButton from './AuthButton.tsx'
 import { AuthFormValues } from '../../types'
 import { loginSchema } from '../../validation.ts'
+import { postLogin } from '../../api/auth.ts'
 
 const LogInForm = () => {
   const navigate = useNavigate()
@@ -21,8 +22,14 @@ const LogInForm = () => {
     mode: 'onChange',
   })
   const value = watch()
-  const onSubmit: SubmitHandler<AuthFormValues> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<AuthFormValues> = async data => {
+    try {
+      const response = await postLogin(data)
+      if (response.statusCode === '200') alert('로그인 되었습니다!')
+      navigate('/')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

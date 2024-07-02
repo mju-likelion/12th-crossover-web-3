@@ -31,5 +31,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'no-nested-ternary': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'consistent-return': 'off',
   },
 }
