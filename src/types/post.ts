@@ -13,7 +13,7 @@ export interface PostTypes {
   nickname: string
   comments: CommentTypes[]
   createdAt: string
-  isMyPost: boolean
+  myPost: boolean
 }
 
 export interface CommentTypes {
@@ -21,4 +21,9 @@ export interface CommentTypes {
   author: string
   createdAt: string
   isMyComment: boolean
+}
+
+export interface Post {
+  title: string
+  content: string
 }

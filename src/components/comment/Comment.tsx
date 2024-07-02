@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import { deleteComment } from '../../api/comment.ts'
 import myProfile from '../../assets/profile_mine.svg'
 import defaultProfile from '../../assets/profile_default.svg'
 import more from '../../assets/more.svg'
@@ -15,7 +17,21 @@ const Comment: React.FC<CommentProps> = ({
   content,
   timeStamp,
 }) => {
+  const { postId } = useParams()
   const profileImg = isMyPost ? myProfile : defaultProfile
+
+  const handleDelete = async () => {
+    try {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm('댓글을 삭제할까요?')) {
+        const response = await deleteComment(postId || '')
+        console.log(response)
+        // TODO 정상적으로 삭제되면 alert, fetching
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Container>
@@ -23,7 +39,7 @@ const Comment: React.FC<CommentProps> = ({
         <ProfileImg src={profileImg} alt="프로필 이미지" />
         <Name>{name}</Name>
         {isMyPost && (
-          <MoreButton>
+          <MoreButton onClick={handleDelete}>
             <img src={more} alt="더보기 버튼" />
           </MoreButton>
         )}

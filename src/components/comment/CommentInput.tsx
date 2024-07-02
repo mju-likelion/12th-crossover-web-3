@@ -1,15 +1,36 @@
 import styled from 'styled-components'
+import { useState } from 'react'
+import { postComment } from '../../api/comment.ts'
 import send from '../../assets/send.svg'
 
 interface InputProps {
   placeHolder: string
 }
+interface CommentProps {
+  postId: string
+}
 
-const CommentInput = () => {
+const CommentInput: React.FC<CommentProps> = ({ postId }) => {
+  const [comment, setComment] = useState('')
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value)
+  }
+
+  const onClick = async () => {
+    if (comment !== '') {
+      await postComment(postId, comment)
+      setComment('')
+    }
+  }
+
   return (
     <Container>
-      <Input placeHolder="댓글" />
-      <Button>
+      <Input
+        placeHolder="댓글"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
+      />
+      <Button onClick={onClick}>
         <img src={send} alt="전송 아이콘" />
       </Button>
     </Container>
