@@ -1,20 +1,20 @@
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { deletePost, getPostDetail } from '../api/post.ts'
+import { deletePost } from '../api/post.ts'
 import { calculateTime } from '../utils/calculateTime.ts'
-import { getComments } from '../api/comment.ts'
 import Button from '../components/post/Button.tsx'
 import ContentBox from '../components/post/ContentBox.tsx'
 import CommentInput from '../components/comment/CommentInput.tsx'
 import Comment from '../components/comment/Comment.tsx'
-import { CommentTypes, PostTypes } from '../types'
+import { CommentTypes } from '../types'
+import { postDetail } from '../assets/data/postDetail.ts'
 
 const Detail = () => {
   const { postId } = useParams()
-  const [postData, setPostData] = useState<PostTypes>()
-  const [commentsData, setCommentsData] = useState<CommentTypes[]>([])
-  const { nickname, title, content, myPost } = postData || {}
+  // const [postData, setPostData] = useState<PostTypes>()
+  // const [commentsData, setCommentsData] = useState<CommentTypes[]>([])
+  const { nickname, title, content, myPost } = postDetail || {}
 
   const handlePostDelete = async () => {
     try {
@@ -30,8 +30,8 @@ const Detail = () => {
 
   useEffect(() => {
     const fetchPostData = async () => {
-      const response = await getPostDetail(postId || '')
-      setPostData(response)
+      // const response = await getPostDetail(postId || '')
+      // setPostData(response)
     }
     try {
       fetchPostData()
@@ -42,8 +42,8 @@ const Detail = () => {
 
   useEffect(() => {
     const fetchCommentData = async () => {
-      const response = await getComments(postId || '')
-      setCommentsData(response)
+      // const response = await getComments(postId || '')
+      // setCommentsData(response)
     }
     try {
       fetchCommentData()
@@ -54,7 +54,7 @@ const Detail = () => {
 
   return (
     <PageContainer>
-      {postData && (
+      {postDetail && (
         <>
           <Nickname>{nickname}</Nickname>
           <ContentBox height="134" content={title || ''} maxLength={20} />
@@ -62,7 +62,7 @@ const Detail = () => {
           <CommentWrapper>
             <CommentInput postId={postId || ''} />
             <CommentList>
-              {commentsData?.map((comment: CommentTypes) => (
+              {postDetail?.comments.map((comment: CommentTypes) => (
                 <Comment
                   key={comment.createdAt}
                   isMyPost={comment.isMyComment}

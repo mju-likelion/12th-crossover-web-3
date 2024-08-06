@@ -1,21 +1,23 @@
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPosts } from '../api/post.ts'
+// import { getPosts } from '../api/post.ts'
 import Button from '../components/post/Button.tsx'
 import PostListItem from '../components/post/PostListItem.tsx'
-import { PostListItemTypes } from '../types'
+// import { PostListItemTypes } from '../types'
+import { postList } from '../assets/data/postList.ts'
 
 const Main = () => {
-  const [postList, setPostList] = useState<PostListItemTypes[]>([])
+  // const [postList, setPostList] = useState<PostListItemTypes[]>([])
+
   const navigate = useNavigate()
   const onClick = () => {
     navigate('/write')
   }
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getPosts()
-      setPostList(response)
+      // const response = await getPosts()
+      // setPostList(response)
     }
     try {
       fetchData()
@@ -30,7 +32,7 @@ const Main = () => {
         작성하기
       </WriteButton>
       <PostListContainer>
-        {postList?.map(item => (
+        {postList?.content?.map(item => (
           <PostListItem key={item.postId} itemData={item} />
         ))}
       </PostListContainer>
